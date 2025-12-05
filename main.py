@@ -3,6 +3,31 @@ from simulator import robot, FORWARD, BACKWARD, STOP
 # TODO: Write your code here!
 # Use robot.motors() to move
 # Use robot.left_sonar() and robot.right_sonar() to sense obstacles
+
+# 90 = 1.525
+
+l_sence = robot.left_sonar()
+r_sence = robot.right_sonar()
+
+def nav_wall():
+    global l_sence
+    global r_sence
+    while l_sence and r_sence > 11:
+        l_sence = robot.left_sonar()
+        r_sence = robot.right_sonar()
+        robot.motors(FORWARD, FORWARD, 0.1)
+        print(f"left = {robot.left_sonar()}, right = {robot.right_sonar()}")
+    robot.motors(STOP, STOP, 0.1)
+
+def turn_perf():
+    global l_sence
+    global r_sence
+    original_right_sence = r_sence
+    original_left_sence = l_sence
+    while l_sence and r_sence != original_left_sence and original_r_sence:
+        robot.motors(FORWARD, FORWARD, 0.1)
+    robot.motors(STOP, STOP, 0.1)
+
 def off():
     print("the robot is off")
     press = input("would you like to: turn it on(o), or leave (l)?")
@@ -34,6 +59,8 @@ def on():
 
 def spiral():
     print("the robot is going spiral")
+    global l_sence
+    global r_sence
     press = input("would you like to: turn it off(o), spiral again(sp), weave(w), circle(c), sence(se), or hold(h)?")
     if press == "o":
         off()
@@ -50,9 +77,18 @@ def spiral():
     else:
         again()
 
-def weave(way):
-    way = input("would you like a long weve or a short weave?")
+def weave():
+    global l_sence
+    global r_sence
+    way = input("would you like a long weve(l) or a short weave?(s)")
     print("the robot is goin weave")
+    if way == "l":
+        print("long, ok")
+        nav_wall()
+        robot.motors(FORWARD, BACKWARD, 1.499999999999999999999)
+        print("now to weave")
+    elif way == "s":
+        print("shork, got ti")
     press = input("would you like to: turn it off(o), spiral(sp), weave again(w), circle(c), sence(se), or hold(h)?")
     if press == "o":
         off()
@@ -69,9 +105,12 @@ def weave(way):
     else:
         again()
 
+# 90 = 1.525
+# ~360 = 6.124999999999999
+
 def circle():
     print("the robot is goinf circle")
-    robot.motors(FORWARD, BACKWARD, 6.122334455)
+    robot.motors(FORWARD, BACKWARD, 4*1.49999999999999999999)
     press = input("would you like to: turn it off(o), spiral(sp), weave(w), circle again(c), sence,(se), or hold(h)?")
     if press == "o":
         off()
@@ -90,9 +129,9 @@ def circle():
 
 def sence():
     print("the robot is going sence")
-    left_sence = robot.left_sonar()
-    r_sence = robot.right_sonar()
-    print(f"the left sonar sences {left_sence} from the wall")
+    global l_sence
+    global r_sence
+    print(f"the left sonar sences {l_sence} cm from the wall")
     print(f"the right sonar sences {r_sence}")
     press = input("would you like to: turn it off(o), spiral(sp), weave(w), circle(c), sence again(se), or hold(h)?")
     if press == "o":
