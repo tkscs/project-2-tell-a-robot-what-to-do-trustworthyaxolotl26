@@ -34,7 +34,7 @@ def turn_perf():
     l_sence = robot.left_sonar()
     r_sence = robot.right_sonar()
     while l_sence != original_left_sence or r_sence != original_right_sence:
-        robot.motors(FORWARD, BACKWARD, 1)
+        robot.motors(FORWARD, BACKWARD, 0.001)
         l_sence = robot.left_sonar()
         r_sence = robot.right_sonar()
         print(f"{l_sence, r_sence} <curent, og> {original_right_sence, original_left_sence} ")
