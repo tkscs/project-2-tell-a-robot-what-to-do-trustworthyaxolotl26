@@ -23,22 +23,42 @@ def nav_wall():
 
 def turn_perf():
     '''
-    this funchtion is supposed to turn a perfect 360 degrees but it tkes FOREVBERRR!!! UGGGGHHHHHHHHHHHH
+    this function is supposed to turn a perfect 360 degrees but it tkes FOREVBERRR!!! UGGGGHHHHHHHHHHHH
     '''
     global l_sence
     global r_sence
     original_right_sence = robot.right_sonar()
     original_left_sence = robot.left_sonar()
-    print(f"{l_sence, r_sence} <curent, og> {original_right_sence, original_left_sence} ")
+    print(f"{l_sence, r_sence} <- curent. og -> {original_right_sence, original_left_sence} ")
     robot.motors(FORWARD, BACKWARD, 0.2)
     l_sence = robot.left_sonar()
     r_sence = robot.right_sonar()
-    while l_sence != original_left_sence or r_sence != original_right_sence:
-        robot.motors(FORWARD, BACKWARD, 0.001)
-        l_sence = robot.left_sonar()
-        r_sence = robot.right_sonar()
-        print(f"{l_sence, r_sence} <curent, og> {original_right_sence, original_left_sence} ")
-    robot.motors(STOP, STOP, 0.1)
+    robot.motors(FORWARD, BACKWARD, 4*1.49999999999999999999)
+    l_sence = robot.left_sonar()
+    r_sence = robot.right_sonar()
+
+#------------------------------------------#
+
+    # while l_sence != original_left_sence or r_sence != original_right_sence:
+    #     robot.motors(FORWARD, BACKWARD, 0.001)
+    #     l_sence = robot.left_sonar()
+    #     r_sence = robot.right_sonar()
+    #     print(f"{l_sence, r_sence} <curent, og> {original_right_sence, original_left_sence} ")
+    # robot.motors(STOP, STOP, 0.1)
+
+    '''
+    What if you try turning right a big amount that's approximately 
+    how long it takes to turn 360, then see if your sonar readings
+    suggest you should turn right or left to get to the original
+    sonar readings. Then spin that direction by small amounts,
+    until you overshoot. Then go the other direction by even 
+    smaller amounts until you overshoot. Then go the opposite 
+    direction by EVEN SMALLER amounts. Pick how close you want 
+    to be when you stop. (It's impossible to get the exact same 
+    amount as before, but you can get within a couple decimal 
+    points, which is pretty good!)
+    '''
+
     on()
 
 def off():
@@ -79,8 +99,16 @@ def spiral():
     l_sence = robot.left_sonar()
     r_sence = robot.right_sonar()
     nav_wall()
-    robot.motors(FORWARD, BACKWARD, 1.49999999999999999999)
+    robot.motors(FORWARD, BACKWARD, 1.525)
     nav_wall()
+    robot.motors(FORWARD, BACKWARD, 1.525)
+    nav_wall()
+    robot.motors(FORWARD, BACKWARD, 1.525)
+    nav_wall()
+    robot.motors(FORWARD, BACKWARD, 1.525)
+    robot.motors(FORWARD, FORWARD, 10)
+
+    #continue till center
 
     on()
 
@@ -89,13 +117,20 @@ def weave(way):
     global r_sence
     l_sence = robot.left_sonar()
     r_sence = robot.right_sonar()
+    #nav to corner
     if way == "l":
         print("long, ok")
         nav_wall()
         robot.motors(FORWARD, BACKWARD, 1.525)
         print("now to weave")
+        for i in range(5):
+            nav_wall()
+            robot.motors(FORWARD, BACKWARD, 1.525)
+            robot.motors(FORWARD, FORWARD, 1)
+            robot.motors(FORWARD, BACKWARD, 1.525)
     elif way == "s":
         print("shork, got ti")
+        #code to do it
     on()
 
 def inter_weave():
