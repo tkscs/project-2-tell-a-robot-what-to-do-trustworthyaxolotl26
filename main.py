@@ -1,6 +1,5 @@
 from simulator import robot, FORWARD, BACKWARD, STOP
 
-# TODO: Write your code here!
 # Use robot.motors() to move
 # Use robot.left_sonar() and robot.right_sonar() to sense obstacles
 
@@ -17,7 +16,7 @@ def nav_wall():
     while l_sence and r_sence > 11:
         l_sence = robot.left_sonar()
         r_sence = robot.right_sonar()
-        robot.motors(FORWARD, FORWARD, 0.1)
+        robot.motors(FORWARD, FORWARD, 0.5)
         #print(f"left = {robot.left_sonar()}, right = {robot.right_sonar()}")
     robot.motors(STOP, STOP, 0.1)
 
@@ -98,6 +97,9 @@ def spiral():
     global r_sence
     l_sence = robot.left_sonar()
     r_sence = robot.right_sonar()
+    x = 23
+    y = 9
+    #inital loop thingy
     nav_wall()
     robot.motors(FORWARD, BACKWARD, 1.525)
     nav_wall()
@@ -105,8 +107,22 @@ def spiral():
     nav_wall()
     robot.motors(FORWARD, BACKWARD, 1.525)
     nav_wall()
-    robot.motors(FORWARD, BACKWARD, 1.525)
-    robot.motors(FORWARD, FORWARD, 10)
+    #now need to shrink
+    #TODO this might not work and is prob bad
+    for i in range(12):
+        robot.motors(FORWARD, BACKWARD, 1.525)
+        robot.motors(STOP, STOP, 0.1)
+        robot.motors(FORWARD, FORWARD, x)
+        robot.motors(FORWARD, BACKWARD, 1.525)
+        robot.motors(STOP, STOP, 0.1)
+        robot.motos(FORWARD, FORWARD, y)
+        x = x-10
+        y = y-5
+
+# for i in range(20):
+#         turtle.forward(x)
+#         turtle.right(90) 
+#         x = x+10
 
     #continue till center
 
@@ -130,7 +146,7 @@ def weave(way):
             robot.motors(FORWARD, BACKWARD, 1.525)
     elif way == "s":
         print("shork, got ti")
-        #code to do it
+        #TODO code to do it
     on()
 
 def inter_weave():
