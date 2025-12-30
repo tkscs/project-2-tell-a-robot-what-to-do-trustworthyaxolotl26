@@ -9,6 +9,9 @@ l_sence = robot.left_sonar()
 r_sence = robot.right_sonar()
 
 def nav_wall():
+    '''
+    this function makes it so the robot goes near the wall.
+    '''
     global l_sence
     global r_sence
     l_sence = robot.left_sonar()
@@ -61,6 +64,12 @@ def turn_perf():
     on()
 
 def off():
+    '''
+    a silly little state that is kinda annoying but im not changing.
+
+    its also a little pointless...
+    *shrugs*
+    '''
     print("the robot is off")
     press = input("would you like to: turn it on(o), or leave (l)?")
     if press == "o":
@@ -72,6 +81,9 @@ def off():
         off()
 
 def on():
+    '''
+    the function for the main state
+    '''
     print("the robot is holding")
     press = input("would you like to: turn it off(o), spiral(sp), weave(w), circle(c), sence(se), or hold(h)?")
     if press == "o":
@@ -92,6 +104,9 @@ def on():
         again()
 
 def spiral():
+    """
+    makes the robot spiral... mostly
+    """
     print("the robot is going spiral")
     global l_sence
     global r_sence
@@ -115,9 +130,9 @@ def spiral():
         robot.motors(FORWARD, FORWARD, x)
         robot.motors(FORWARD, BACKWARD, 1.525)
         robot.motors(STOP, STOP, 0.1)
-        robot.motos(FORWARD, FORWARD, y)
-        x = x-10
-        y = y-5
+        robot.motors(FORWARD, FORWARD, y)
+        x = x-7
+        y = y-3
 
 # for i in range(20):
 #         turtle.forward(x)
@@ -129,6 +144,9 @@ def spiral():
     on()
 
 def weave(way):
+    '''
+    the important weave func
+    '''
     global l_sence
     global r_sence
     l_sence = robot.left_sonar()
@@ -164,11 +182,21 @@ def inter_weave():
 # ~360 = 6.124999999999999
 
 def circle():
+    '''
+    the robot makes an ALMOST circle perfect circle
+    '''
     print("the robot is goinf circle")
     robot.motors(FORWARD, BACKWARD, 4*1.49999999999999999999)
     on()
 
 def sence():
+    '''
+    gives you sonar readings.
+
+    
+    
+    I CANT SPELL OK?!?!?
+    '''
     print("the robot is going sence")
     global l_sence
     global r_sence
@@ -179,6 +207,9 @@ def sence():
     on()
     
 def again():
+    '''
+    if you typo or somethin
+    '''
     press = input("we ask again, would you like to: turn it off(o), spiral(sp), weave(w), circle(c), sence(se), or hold(h)?")
     if press == "o":
         off()
@@ -195,7 +226,7 @@ def again():
     else:
         again()
 
-off()
+on()
 
 # # When you're done, close the simulator
 # robot.exit()
