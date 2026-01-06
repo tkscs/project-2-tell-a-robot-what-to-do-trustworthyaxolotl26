@@ -85,7 +85,7 @@ def on():
     the function for the main state
     '''
     print("the robot is holding")
-    press = input("would you like to: turn it off(o), spiral(sp), weave(w), circle(c), sence(se), or hold(h)?")
+    press = input("would you like to: turn it off(o), spiral(sp), weave(w), circle(c), sense(se), or hold(h)?")
     if press == "o":
         off()
     elif press == "sp":
@@ -105,7 +105,7 @@ def on():
 
 def spiral():
     """
-    makes the robot spiral... mostly
+    makes the robot spiral an ok spiral
     """
     print("the robot is going spiral")
     global l_sence
@@ -114,6 +114,12 @@ def spiral():
     r_sence = robot.right_sonar()
     x = 23
     y = 9
+    print("Careful! if this is not the first thing you do with the robot it will probobly crash into the wall. i dont know why or how to fix it. YOuv'E bEeN wARn3d!!!")
+    warning = input("do you want to continue (y/n)")
+    if warning == "n":
+        on()
+    elif warning == "y":
+        print("ok then...")
     #inital loop thingy
     nav_wall()
     robot.motors(FORWARD, BACKWARD, 1.525)
@@ -124,23 +130,15 @@ def spiral():
     nav_wall()
     #now need to shrink
     #TODO this might not work and is prob bad
-    for i in range(12):
+    for i in range(7):
         robot.motors(FORWARD, BACKWARD, 1.525)
         robot.motors(STOP, STOP, 0.1)
         robot.motors(FORWARD, FORWARD, x)
         robot.motors(FORWARD, BACKWARD, 1.525)
         robot.motors(STOP, STOP, 0.1)
         robot.motors(FORWARD, FORWARD, y)
-        x = x-7
-        y = y-3
-
-# for i in range(20):
-#         turtle.forward(x)
-#         turtle.right(90) 
-#         x = x+10
-
-    #continue till center
-
+        x = x-6
+        y = y-2.5
     on()
 
 def weave(way):
@@ -156,15 +154,32 @@ def weave(way):
         print("long, ok")
         nav_wall()
         robot.motors(FORWARD, BACKWARD, 1.525)
-        print("now to weave")
+        nav_wall()
+        #print("now to weave")
         for i in range(5):
             nav_wall()
             robot.motors(FORWARD, BACKWARD, 1.525)
             robot.motors(FORWARD, FORWARD, 1)
             robot.motors(FORWARD, BACKWARD, 1.525)
+            nav_wall()
+            robot.motors(BACKWARD, FORWARD, 1.525)
+            robot.motors(FORWARD, FORWARD, 1)
+            robot.motors(BACKWARD, FORWARD, 1.525)
     elif way == "s":
         print("shork, got ti")
-        #TODO code to do it
+        nav_wall()
+        robot.motors(FORWARD, BACKWARD, 1.525)
+        nav_wall()
+        for i in range(5):
+            nav_wall()
+            robot.motors(FORWARD, BACKWARD, 1.525)
+            robot.motors(FORWARD, FORWARD, 1)
+            robot.motors(FORWARD, BACKWARD, 1.525)
+            nav_wall()
+            robot.motors(BACKWARD, FORWARD, 1.525)
+            robot.motors(FORWARD, FORWARD, 1)
+            robot.motors(BACKWARD, FORWARD, 1.525)
+       #print("sorry thos feature is under construction. please try again in 10 years. or never. *shrug*")
     on()
 
 def inter_weave():
@@ -186,7 +201,7 @@ def circle():
     the robot makes an ALMOST circle perfect circle
     '''
     print("the robot is goinf circle")
-    robot.motors(FORWARD, BACKWARD, 4*1.49999999999999999999)
+    robot.motors(FORWARD, BACKWARD, 4*1.4999999999999999999999999999999999999999999)
     on()
 
 def sence():
@@ -197,20 +212,20 @@ def sence():
     
     I CANT SPELL OK?!?!?
     '''
-    print("the robot is going sence")
+    print("the robot is going sense")
     global l_sence
     global r_sence
     l_sence = robot.left_sonar()
     r_sence = robot.right_sonar()
-    print(f"the left sonar sences {l_sence} cm from the wall")
-    print(f"the right sonar sences {r_sence}")
+    print(f"the left sonar senses {l_sence} cm from the wall")
+    print(f"the right sonar senses {r_sence}")
     on()
     
 def again():
     '''
     if you typo or somethin
     '''
-    press = input("we ask again, would you like to: turn it off(o), spiral(sp), weave(w), circle(c), sence(se), or hold(h)?")
+    press = input("we ask again, would you like to: turn it off(o), spiral(sp), weave(w), circle(c), sense(se), or hold(h)?")
     if press == "o":
         off()
     elif press == "sp":
