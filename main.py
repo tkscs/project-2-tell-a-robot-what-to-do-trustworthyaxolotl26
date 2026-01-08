@@ -186,6 +186,7 @@ def inter_weave():
     '''
     so i can make a fuction with a variable
     '''
+    print("this will also prob make the robot crash if not careful. youve been warned.......")
     way = input("would you like a long weve(l) or a short weave?(s)")
     print("the robot is goin weave")
     if way == "l":
@@ -201,7 +202,7 @@ def circle():
     the robot makes an ALMOST circle perfect circle
     '''
     print("the robot is goinf circle")
-    robot.motors(FORWARD, BACKWARD, 4*1.4999999999999999999999999999999999999999999)
+    robot.motors(FORWARD, BACKWARD, 4*1.499999999999999999999999999999999999999999999999999999999)
     on()
 
 def sence():
