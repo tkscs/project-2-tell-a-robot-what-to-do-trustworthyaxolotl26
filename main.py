@@ -16,7 +16,7 @@ def nav_wall():
     global r_sence
     l_sence = robot.left_sonar()
     r_sence = robot.right_sonar()
-    while l_sence and r_sence > 11:
+    while l_sence > 11  and r_sence > 11:
         l_sence = robot.left_sonar()
         r_sence = robot.right_sonar()
         robot.motors(FORWARD, FORWARD, 0.5)
@@ -186,7 +186,7 @@ def inter_weave():
     '''
     so i can make a fuction with a variable
     '''
-    print("this will also prob make the robot crash if not careful. youve been warned.......")
+    print("this will prob make the robot crash if not careful. youve been warned.......")
     way = input("would you like a long weve(l) or a short weave?(s)")
     print("the robot is goin weave")
     if way == "l":
